@@ -1,7 +1,6 @@
 NAME = Escape.a
 
-SRC = main.c \
-rubbish.c
+SRC = main.c
 
 HDRS = incl/lib.h
 

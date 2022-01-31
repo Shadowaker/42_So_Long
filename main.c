@@ -6,62 +6,56 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 15:35:40 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/01/29 20:08:23 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/01/31 20:52:42 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "incl/lib.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_dic *data, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	dst = data->addr + (y * data->line_len + x * (data->bpp / 8));
 	*(unsigned int*) dst = color;
 }
 
-t_data	draw_cross(void *mlx, void *mlx_win, t_data img, int focus)
+t_map	map_render(void)
 {
-	int		i;
+	int	f;
 
-	i = 0;
-	while (i < 100)
-	{
-		img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-									&img.endian);
-		my_mlx_pixel_put(&img, 960 + focus, 540 + i + focus, 0x00FF0000);
-		my_mlx_pixel_put(&img, 960 + i + focus, 540 + focus, 0x00FF0000);
-		mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-		i++;
-	}
-	while (i > 0)
-	{
-		img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-									&img.endian);
-		my_mlx_pixel_put(&img, 960 + focus, 540 - i + focus, 0x00FF0000);
-		my_mlx_pixel_put(&img, 960 - i + focus, 540 + focus, 0x00FF0000);
-		i--;
-	}
-	return (img);
+	f = open("");
+
 }
 
-int	main(void)
+t_dic	draw_image(void *mlx, void *mlx_win, int con, char *path)
 {
-	int		j;
+	int		i;
+	int		img_width;
+	int		img_height;
+	t_dic	win_img;
+
+	i = con;
+	win_img.img = mlx_xpm_file_to_image(mlx, path, &img_width, &img_height);
+	win_img.addr = mlx_get_data_addr(win_img.img, &win_img.bpp, &win_img.line_len, &win_img.endian);
+	mlx_put_image_to_window(mlx, mlx_win, win_img.img, 0, 0);
+
+	return (win_img);
+}
+
+int main(void)
+{
 	void	*mlx;
 	void	*mlx_win;
-	t_data	img;
+	int		con = 0;
+	t_dic	win_img;
 
-	j = 0;
 	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Escape");
-	while (j <  4)
+	mlx_win = mlx_new_window(mlx, 900, 800, "Escape");
+	while (con < 10)
 	{
-		img.img = mlx_new_image(mlx, 1920, 1080);
-		img = draw_cross(mlx, mlx_win, img, (j * 100) + j);
-		mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-		j++;
+		win_img = draw_image(mlx, mlx_win, con, "sprites/wall.xpm");
+		con++;
 	}
 	mlx_loop(mlx);
-	return (0);
 }

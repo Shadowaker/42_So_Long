@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 18:37:10 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/01/29 20:26:20 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/01/31 17:32:39 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@
 #  define Height 600
 # endif
 
+/* include gnl */
+
+//# include "srcs/gnl/get_next_line.h"
+
 /* --------------- */
 
 /* Cell struct */
@@ -38,25 +42,26 @@ typedef struct s_cell {
 
 /* Map struct */
 typedef struct s_map {
-	char	*line;
-	char	*col;
+	char	**matrix;
+	int		line;
+	int		col;
 }				t_map;
 
 /* Image base struct (pixel for pixel) */
-typedef struct s_img {
+typedef struct s_dic {
 	void	*img;
 	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
+	int		bpp;
+	int		line_len;
 	int		endian;
-}				t_img;
+}				t_dic;
 
-/* Simple mlx base struct (Not used) */
+/* Simple mlx base struct (Not used, not trusted) */
 typedef struct s_mlx
 {
 	void	*mlx_ptr;
 	void	*win;
-	t_img	img;
+	t_dic	img;
 }				t_mlx;
 
 
