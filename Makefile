@@ -1,6 +1,10 @@
 NAME = Escape.a
 
-SRC = main.c
+SRC = main.c \
+srcs/ft_draw_it.c \
+srcs/ft_map.c \
+srcs/ft_map_utils.c \
+srcs/ft_split.c
 
 HDRS = incl/lib.h
 

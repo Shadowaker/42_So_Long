@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 18:37:10 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/01/31 17:32:39 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/01 19:33:56 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 # define LIB_H
 
 # include <mlx.h>
-# include <stdlib.h>
+# include <fcntl.h>
 # include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 /* general define */
 
@@ -26,10 +28,6 @@
 # ifndef Height
 #  define Height 600
 # endif
-
-/* include gnl */
-
-//# include "srcs/gnl/get_next_line.h"
 
 /* --------------- */
 
@@ -43,8 +41,8 @@ typedef struct s_cell {
 /* Map struct */
 typedef struct s_map {
 	char	**matrix;
-	int		line;
-	int		col;
+	size_t	line;
+	size_t	col;
 }				t_map;
 
 /* Image base struct (pixel for pixel) */
@@ -56,13 +54,23 @@ typedef struct s_dic {
 	int		endian;
 }				t_dic;
 
-/* Simple mlx base struct (Not used, not trusted) */
+/* Simple mlx base struct */
 typedef struct s_mlx
 {
-	void	*mlx_ptr;
-	void	*win;
-	t_dic	img;
+	void	*mlx;
+	void	*mlx_win;
+	char	**matrix;
+	int		x;
+	int		y;
 }				t_mlx;
 
+char	**ft_split(char *s, char c);
+size_t	ft_strlen(char *str);
+char	*ft_strmerge(char *buff, char *tmp_buff);
+char	**read_map(int fd);
+size_t	ft_matlen(char **mat);
+void	my_mlx_pixel_put(t_dic *data, int x, int y, int color);
+t_dic	draw_image(void *mlx, void *mlx_win, int *arr, char *path);
+void	draw_map(t_mlx *game);
 
 #endif
