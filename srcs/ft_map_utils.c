@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 20:41:23 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/01 20:02:08 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/02 21:29:45 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,36 @@ size_t	ft_matlen(char **mat)
 	return (i);
 }
 
+int	*ft_coord(char **mat)
+{
+	int	i;
+	int	j;
+	int	*res;
+
+	res = malloc(sizeof(int) * 2);
+	i = 0;
+	while(mat[i] != 0)
+	{
+		j = 0;
+		while(mat[i][j] != '\0')
+		{
+			if (mat[i][j] == 'P')
+				{
+					printf("CULI NUDISSIMI: %d - %d \n", i, j);
+					res[0] = i - 1;
+					res[1] = j - 1;
+					return (res);
+				}
+			j++;
+		}
+		i++;
+	}
+	printf("CULI NUDI: %d - %d \n", i, j);
+	res[0] = i;
+	res[1] = j;
+	return (res);
+}
+
 char	*ft_replace(char *s, int i, char c)
 {
 	char	*res;
@@ -30,7 +60,7 @@ char	*ft_replace(char *s, int i, char c)
 	j = 0;
 	while (s[j] != '\0')
 		j++;
-	res = (char *) malloc(j + 1);
+	res = (char *) malloc(j);
 	j = 0;
 	while (s[j] != '\0')
 	{
@@ -41,7 +71,6 @@ char	*ft_replace(char *s, int i, char c)
 		j++;
 	}
 	res[j] = '\0';
-	free(s);
 	return(res);
 }
 

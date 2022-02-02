@@ -6,13 +6,13 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 18:42:56 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/01 19:38:06 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/02 20:14:36 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/lib.h"
 
-static t_map	*map_init()
+t_map	*map_init()
 {
 	int		fd;
 	char	**mat;
@@ -43,33 +43,67 @@ static t_dic	filter(void *mlx, void *mlx_win, int *arr, char cont)
 	return (win_img);
 }
 
-char	**remap(t_mlx game)
+void	remap(t_mlx *game, size_t i, int j, char c)
 {
+	char	*res;
+	char	**matrix;
+	size_t	con;
+	size_t	max;
+
+	max = ft_matlen(game->map->matrix);
+	matrix = (char **) malloc(max);
+	con = 0;
+	printf("+%zu+\n", i);
+	while (con < max)
+	{
+		printf("-%zu-\n", con);
+		if (con == i)
+		{
+			printf("Yes.\n");
+			res = ft_replace(game->map->matrix[con], j, c);
+		}
+		else
+		{
+			printf("No.\n");
+			res = ft_strcpy(game->map->matrix[con]);
+		}
+		printf("\n&%s&\n", res);
+		matrix[con] = res;
+		free(game->map->matrix[con]);
+		con++;
+	}
+	matrix[max] = 0;
+	free(game->map->matrix);
+	game->map->matrix = matrix;
 }
 
 void	draw_map(t_mlx *game)
 {
-	int		*arr;
-	size_t	i = 0;
-	size_t	j;
-	t_dic	win_img;
-	t_map	*map;
+	int				*arr;
+	size_t			i = 0;
+	size_t			j;
+	t_dic			win_img;
 
-	map = map_init();
-	game->mlx_win = mlx_new_window(game->mlx, map->col * 128, map->line * 128, "Escape");
-	while (map->line > i)
+	printf("Drawing\n");
+	printf("-----------------------------------------------\n");
+	ft_printmat(game->map->matrix);
+	printf("-----------------------------------------------\n");
+	game->mlx_win = mlx_new_window(game->mlx, game->map->col * 128, game->map->line * 128, "Escape");
+	while (game->map->line > i)
 	{
 		j = 0;
-		while (map->col >= j)
+		while (game->map->col >= j)
 		{
 			arr = (int *) malloc(sizeof(int) * 2);
 			arr[0] = i;
 			arr[1] = j;
-			win_img = filter(game->mlx, game->mlx_win, arr, map->matrix[i][j]);
+			win_img = filter(game->mlx, game->mlx_win, arr, game->map->matrix[i][j]);
 			j++;
 			free(arr);
+			//printf("Colonna %zu\n", j);
 		}
+		//printf("Linea %zu\n", i);
 		i++;
 	}
-	game->matrix = map->matrix;
+	printf("Finito.\n");
 }

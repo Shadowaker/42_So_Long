@@ -4,7 +4,8 @@ SRC = main.c \
 srcs/ft_draw_it.c \
 srcs/ft_map.c \
 srcs/ft_map_utils.c \
-srcs/ft_split.c
+srcs/ft_split.c \
+srcs/ft_utils.c
 
 HDRS = incl/lib.h
 
