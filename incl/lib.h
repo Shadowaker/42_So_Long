@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 18:37:10 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/02 20:13:15 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/04 18:12:13 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,6 @@
 
 /* --------------- */
 
-/* Cell struct */
-typedef struct s_cell {
-	char	content;
-	char	img;
-	char	value;
-}				t_cell;
-
 /* Map struct */
 typedef struct s_map {
 	char	**matrix;
@@ -57,9 +50,11 @@ typedef struct s_dic {
 /* Simple mlx base struct */
 typedef struct s_mlx
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_map	*map;
+	void			*mlx;
+	void			*mlx_win;
+	t_map			*map;
+	int				coins;
+	unsigned int	rf;
 }				t_mlx;
 
 t_map	*map_init();
@@ -76,5 +71,10 @@ char	*ft_replace(char *s, int i, char c);
 int		*ft_coord(char **mat);
 char	*ft_strcpy(char *s);
 void	ft_printmat(char **mat);
+void	move_right(t_mlx *game);
+void	move_left(t_mlx *game);
+void	move_up(t_mlx *game);
+void	move_down(t_mlx *game);
+int		end_game(t_mlx *game);
 
 #endif

@@ -6,68 +6,11 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 15:35:40 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/02 20:28:18 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/04 18:41:49 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "incl/lib.h"
-
-void move_up(t_mlx *game)
-{
-	int	*arr;
-	int	i;
-	int	j;
-
-	arr = ft_coord(game->map->matrix);
-	i = arr[0];
-	j = arr[1];
-	remap(game, i + 1, j, 'P');
-	remap(game, i, j, '0');
-	free(arr);
-}
-
-void move_left(t_mlx *game)
-{
-	int	*arr;
-
-	printf("Here\n");
-	arr = ft_coord(game->map->matrix);
-	printf("%d - %d\n", arr[0], arr[1]);
-	printf(".........................................................\n");
-	ft_printmat(game->map->matrix);
-	printf(".........................................................\n");
-	remap(game, arr[0], arr[1] - 1, 'P');
-	remap(game, arr[0], arr[1], '0');
-	free(arr);
-}
-
-void move_down(t_mlx *game)
-{
-	int	*arr;
-	size_t	i;
-	int		j;
-
-	arr = ft_coord(game->map->matrix);
-	i = (size_t) arr[0];
-	j = arr[1];
-	remap(game, i + 1, j, 'P');
-	remap(game, i, j, '0');
-	free(arr);
-}
-
-void move_right(t_mlx *game)
-{
-	int	*arr;
-	size_t	i;
-	int		j;
-
-	arr = ft_coord(game->map->matrix);
-	i = (size_t) arr[0];
-	j = arr[1];
-	remap(game, i + 1, j, 'P');
-	remap(game, i, j, '0');
-	free(arr);
-}
 
 int	end_game(t_mlx *game)
 {
@@ -78,7 +21,6 @@ int	end_game(t_mlx *game)
 
 int	key_filter(int	keycode, t_mlx *game)
 {
-	printf("%d\n", keycode);
 	if (keycode == 53)
 		end_game(game);
 	else if (keycode == 13)
@@ -91,13 +33,16 @@ int	key_filter(int	keycode, t_mlx *game)
 		move_right(game);
 	else
 		return (0);
-	draw_map(game);
 	return (0);
 }
 
 int Game_Loop(t_mlx *game)
 {
-	mlx_hook(game->mlx_win, 2, 0, key_filter, game);
+	if (game->rf == 1)
+	{
+		game->rf = 0;
+		draw_map(game);
+	}
 	return (0);
 }
 
@@ -106,8 +51,11 @@ int main(void)
 	t_mlx	game;
 
 	game.mlx = mlx_init();
+	game.coins = 0;
+	game.rf = 1;
 	game.map = map_init();
-	draw_map(&game);
+	game.mlx_win = mlx_new_window(game.mlx, game.map->col * 128, game.map->line * 128, "Escape");
 	mlx_loop_hook(game.mlx, Game_Loop, &game);
+	mlx_key_hook(game.mlx_win, key_filter, &game);
 	mlx_loop(game.mlx);
 }

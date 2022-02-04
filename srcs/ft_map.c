@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 18:42:56 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/02 20:14:36 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/04 17:12:51 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,40 +43,6 @@ static t_dic	filter(void *mlx, void *mlx_win, int *arr, char cont)
 	return (win_img);
 }
 
-void	remap(t_mlx *game, size_t i, int j, char c)
-{
-	char	*res;
-	char	**matrix;
-	size_t	con;
-	size_t	max;
-
-	max = ft_matlen(game->map->matrix);
-	matrix = (char **) malloc(max);
-	con = 0;
-	printf("+%zu+\n", i);
-	while (con < max)
-	{
-		printf("-%zu-\n", con);
-		if (con == i)
-		{
-			printf("Yes.\n");
-			res = ft_replace(game->map->matrix[con], j, c);
-		}
-		else
-		{
-			printf("No.\n");
-			res = ft_strcpy(game->map->matrix[con]);
-		}
-		printf("\n&%s&\n", res);
-		matrix[con] = res;
-		free(game->map->matrix[con]);
-		con++;
-	}
-	matrix[max] = 0;
-	free(game->map->matrix);
-	game->map->matrix = matrix;
-}
-
 void	draw_map(t_mlx *game)
 {
 	int				*arr;
@@ -84,11 +50,6 @@ void	draw_map(t_mlx *game)
 	size_t			j;
 	t_dic			win_img;
 
-	printf("Drawing\n");
-	printf("-----------------------------------------------\n");
-	ft_printmat(game->map->matrix);
-	printf("-----------------------------------------------\n");
-	game->mlx_win = mlx_new_window(game->mlx, game->map->col * 128, game->map->line * 128, "Escape");
 	while (game->map->line > i)
 	{
 		j = 0;
@@ -100,10 +61,7 @@ void	draw_map(t_mlx *game)
 			win_img = filter(game->mlx, game->mlx_win, arr, game->map->matrix[i][j]);
 			j++;
 			free(arr);
-			//printf("Colonna %zu\n", j);
 		}
-		//printf("Linea %zu\n", i);
 		i++;
 	}
-	printf("Finito.\n");
 }

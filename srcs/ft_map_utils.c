@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 20:41:23 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/02 21:29:45 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/04 17:07:51 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,15 @@ int	*ft_coord(char **mat)
 		{
 			if (mat[i][j] == 'P')
 				{
-					printf("CULI NUDISSIMI: %d - %d \n", i, j);
-					res[0] = i - 1;
-					res[1] = j - 1;
+					res[0] = i;
+					res[1] = j;
 					return (res);
 				}
 			j++;
 		}
 		i++;
 	}
-	printf("CULI NUDI: %d - %d \n", i, j);
-	res[0] = i;
-	res[1] = j;
-	return (res);
+	return (NULL);
 }
 
 char	*ft_replace(char *s, int i, char c)
