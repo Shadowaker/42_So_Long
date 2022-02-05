@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 18:37:10 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/05 19:54:23 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/05 21:31:25 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_dic {
 typedef struct s_cont {
 	t_dic	player;
 	t_dic	coin;
+	t_dic	wall;
 	t_dic	enemy;
 	t_dic	exit;
 	t_dic	background;
@@ -62,6 +63,7 @@ typedef struct s_mlx
 	void			*mlx;
 	void			*mlx_win;
 	t_map			*map;
+	t_cont			*imgs;
 	int				coins;
 	unsigned int	rf;
 }				t_mlx;
@@ -73,8 +75,10 @@ char	*ft_strmerge(char *buff, char *tmp_buff);
 char	**read_map(int fd);
 size_t	ft_matlen(char **mat);
 void	my_mlx_pixel_put(t_dic *data, int x, int y, int color);
-t_dic	draw_image(void *mlx, void *mlx_win, int *arr, char *path);
-void	draw_map(t_mlx *game);
+//t_dic	draw_image(void *mlx, void *mlx_win, int *arr, char *path);
+void	draw_image(t_mlx *game, t_dic img, int *arr);
+void	draw_map(t_mlx *game, t_cont *imgs);
+t_cont	Load_Imgs(void *mlx);
 void	remap(t_mlx *game, size_t i, int j, char c);
 char	*ft_replace(char *s, int i, char c);
 int		*ft_coord(char **mat);

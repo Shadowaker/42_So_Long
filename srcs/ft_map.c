@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 18:42:56 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/05 19:35:45 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/05 21:22:51 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,23 @@ t_map	*map_init()
 	return (map);
 }
 
-static t_dic	filter(void *mlx, void *mlx_win, int *arr, char cont)
+static void	filter(t_mlx *game, t_cont *imgs, int *arr, char cont)
 {
-	t_dic	win_img;
-
 	if (cont == '1')
-		win_img = draw_image(mlx, mlx_win, arr, "sprites/Wall_32.xpm");
+		draw_image(game, imgs->wall, arr);
 	else if (cont == 'P')
-		win_img = draw_image(mlx, mlx_win, arr, "sprites/Player_32.xpm");
+		draw_image(game, imgs->player, arr);
 	else if (cont == 'C')
-		win_img = draw_image(mlx, mlx_win, arr, "sprites/Coin_32.xpm");
+		draw_image(game, imgs->coin, arr);
 	else
-		win_img = draw_image(mlx, mlx_win, arr, "sprites/Background_32.xpm");
-	return (win_img);
+		draw_image(game, imgs->background, arr);
 }
 
-void	draw_map(t_mlx *game)
+void	draw_map(t_mlx *game, t_cont *imgs)
 {
 	int				*arr;
 	size_t			i = 0;
 	size_t			j;
-	t_dic			win_img;
 
 	while (game->map->line > i)
 	{
@@ -58,7 +54,7 @@ void	draw_map(t_mlx *game)
 			arr = (int *) malloc(sizeof(int) * 2);
 			arr[0] = i;
 			arr[1] = j;
-			win_img = filter(game->mlx, game->mlx_win, arr, game->map->matrix[i][j]);
+			filter(game, imgs, arr, game->map->matrix[i][j]);
 			j++;
 			free(arr);
 		}

@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 15:35:40 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/05 19:36:12 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/05 21:46:54 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	end_game(t_mlx *game)
 
 int	key_filter(int	keycode, t_mlx *game)
 {
+	printf("Keypress: %d\n", keycode);
 	if (keycode == 53)
 		end_game(game);
 	else if (keycode == 13)
@@ -41,7 +42,7 @@ int Game_Loop(t_mlx *game)
 	if (game->rf == 1)
 	{
 		game->rf = 0;
-		draw_map(game);
+		draw_map(game, game->imgs);
 	}
 	return (0);
 }
@@ -49,12 +50,15 @@ int Game_Loop(t_mlx *game)
 int main(void)
 {
 	t_mlx	game;
+	t_cont	imgs;
 
 	game.mlx = mlx_init();
 	game.coins = 0;
 	game.rf = 1;
 	game.map = map_init();
 	game.mlx_win = mlx_new_window(game.mlx, game.map->col * 32, game.map->line * 32, "Escape");
+	imgs = Load_Imgs(game.mlx);
+	game.imgs = &imgs;
 	mlx_loop_hook(game.mlx, Game_Loop, &game);
 	mlx_key_hook(game.mlx_win, key_filter, &game);
 	mlx_loop(game.mlx);
