@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 18:39:46 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/02 18:12:49 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/05 19:54:44 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,31 @@ t_dic	draw_image(void *mlx, void *mlx_win, int *arr, char *path)
 	j = arr[1];
 	win_img.img = mlx_xpm_file_to_image(mlx, path, &img_width, &img_height);
 	win_img.addr = mlx_get_data_addr(win_img.img, &win_img.bpp, &win_img.line_len, &win_img.endian);
-	mlx_put_image_to_window(mlx, mlx_win, win_img.img, j * 128, i * 128);
+	mlx_put_image_to_window(mlx, mlx_win, win_img.img, j * 32, i * 32);
 
 	return (win_img);
 }
+
+t_dic	Load_Img(void *mlx, char *path)
+{
+	int		img_width;
+	int		img_height;
+	t_dic	win_img;
+
+	win_img.img = mlx_xpm_file_to_image(mlx, path, &img_width, &img_height);
+	win_img.addr = mlx_get_data_addr(win_img.img, &win_img.bpp, &win_img.line_len, &win_img.endian);
+
+	return (win_img);
+}
+
+t_cont	Load_Imgs(void *mlx)
+{
+	t_cont	imgs;
+
+	imgs.player = Load_Img(mlx, "sprites/Player_32.xpm");
+	imgs.coin = Load_Img(mlx, "sprites/Coin_32.xpm");
+	// Enemy
+	// Exit
+	imgs.background = Load_Img(mlx, "sprites/Background_32.xpm");
+}
+

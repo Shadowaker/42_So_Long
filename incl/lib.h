@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 18:37:10 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/04 18:12:13 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/05 19:54:23 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,15 @@ typedef struct s_dic {
 	int		line_len;
 	int		endian;
 }				t_dic;
+
+/* Images container */
+typedef struct s_cont {
+	t_dic	player;
+	t_dic	coin;
+	t_dic	enemy;
+	t_dic	exit;
+	t_dic	background;
+}				t_cont;
 
 /* Simple mlx base struct */
 typedef struct s_mlx

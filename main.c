@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 15:35:40 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/04 18:41:49 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/05 19:36:12 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int main(void)
 	game.coins = 0;
 	game.rf = 1;
 	game.map = map_init();
-	game.mlx_win = mlx_new_window(game.mlx, game.map->col * 128, game.map->line * 128, "Escape");
+	game.mlx_win = mlx_new_window(game.mlx, game.map->col * 32, game.map->line * 32, "Escape");
 	mlx_loop_hook(game.mlx, Game_Loop, &game);
 	mlx_key_hook(game.mlx_win, key_filter, &game);
 	mlx_loop(game.mlx);

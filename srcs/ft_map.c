@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 18:42:56 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/04 17:12:51 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/05 19:35:45 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ static t_dic	filter(void *mlx, void *mlx_win, int *arr, char cont)
 	t_dic	win_img;
 
 	if (cont == '1')
-		win_img = draw_image(mlx, mlx_win, arr, "sprites/wall.xpm");
+		win_img = draw_image(mlx, mlx_win, arr, "sprites/Wall_32.xpm");
 	else if (cont == 'P')
-		win_img = draw_image(mlx, mlx_win, arr, "sprites/Player.xpm");
+		win_img = draw_image(mlx, mlx_win, arr, "sprites/Player_32.xpm");
 	else if (cont == 'C')
-		win_img = draw_image(mlx, mlx_win, arr, "sprites/Coin.xpm");
+		win_img = draw_image(mlx, mlx_win, arr, "sprites/Coin_32.xpm");
 	else
-		win_img = draw_image(mlx, mlx_win, arr, "sprites/background2.xpm");
+		win_img = draw_image(mlx, mlx_win, arr, "sprites/Background_32.xpm");
 	return (win_img);
 }
 
