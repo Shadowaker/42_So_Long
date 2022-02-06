@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 18:39:46 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/05 21:40:53 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/06 20:56:21 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	my_mlx_pixel_put(t_dic *data, int x, int y, int color)
 
 void	draw_image(t_mlx *game, t_dic img, int *arr)
 {
-	mlx_put_image_to_window(game->mlx, game->mlx_win, img.img, arr[1] * 32, arr[0] * 32);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, img.img, arr[1] * Width, arr[0] * Height);
 }
 
 
@@ -41,14 +41,13 @@ t_dic	Load_Img(void *mlx, char *path)
 t_cont	Load_Imgs(void *mlx)
 {
 	t_cont	imgs;
-	/* 0, 1, 2, 3*/
+	/* 0, 1, 2*/
 
-	imgs.player = Load_Img(mlx, "sprites/Player_32.xpm");
-	imgs.coin = Load_Img(mlx, "sprites/Coin_32.xpm");
-	imgs.wall = Load_Img(mlx, "sprites/Wall_32.xpm");
-	// Enemy
-	// Exit
-	imgs.background = Load_Img(mlx, "sprites/Background_32.xpm");
+	imgs.player = Load_Img(mlx, "sprites/64px/Player/Player_0.xpm");
+	imgs.coin = Load_Img(mlx, "sprites/64px/Coin/Coin_0.xpm");
+	imgs.wall = Load_Img(mlx, "sprites/64px/Wall/Wall.xpm");
+	imgs.enemy = Load_Img(mlx, "sprites/64px/Enemy/Enemy_0.xpm");
+	imgs.exit = Load_Img(mlx, "sprites/64px/Exit/Exit.xpm");
+	imgs.background = Load_Img(mlx, "sprites/64px/Background/Background.xpm");
 	return (imgs);
 }
-

@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 18:37:10 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/05 21:31:25 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/06 20:55:49 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 /* general define */
 
 # ifndef Width
-#  define Width 1920
+#  define Width 64
 # endif
 
 # ifndef Height
-#  define Height 600
+#  define Height 64
 # endif
 
 /* --------------- */
@@ -48,7 +48,7 @@ typedef struct s_dic {
 }				t_dic;
 
 /* Images container */
-typedef struct s_cont {
+typedef struct s_cont 	{
 	t_dic	player;
 	t_dic	coin;
 	t_dic	wall;
@@ -66,24 +66,30 @@ typedef struct s_mlx
 	t_cont			*imgs;
 	int				coins;
 	unsigned int	rf;
+	unsigned int	steps;
 }				t_mlx;
 
+/* Functions headers */
+
 t_map	*map_init();
-char	**ft_split(char *s, char c);
-size_t	ft_strlen(char *str);
-char	*ft_strmerge(char *buff, char *tmp_buff);
 char	**read_map(int fd);
 size_t	ft_matlen(char **mat);
-void	my_mlx_pixel_put(t_dic *data, int x, int y, int color);
-//t_dic	draw_image(void *mlx, void *mlx_win, int *arr, char *path);
-void	draw_image(t_mlx *game, t_dic img, int *arr);
-void	draw_map(t_mlx *game, t_cont *imgs);
-t_cont	Load_Imgs(void *mlx);
 void	remap(t_mlx *game, size_t i, int j, char c);
 char	*ft_replace(char *s, int i, char c);
 int		*ft_coord(char **mat);
-char	*ft_strcpy(char *s);
 void	ft_printmat(char **mat);
+
+char	**ft_split(char *s, char c);
+int		ft_strstr(char *s, char c);
+size_t	ft_strlen(char *str);
+char	*ft_strmerge(char *buff, char *tmp_buff);
+char	*ft_strcpy(char *s);
+
+void	my_mlx_pixel_put(t_dic *data, int x, int y, int color);
+void	draw_image(t_mlx *game, t_dic img, int *arr);
+void	draw_map(t_mlx *game, t_cont *imgs);
+t_cont	Load_Imgs(void *mlx);
+
 void	move_right(t_mlx *game);
 void	move_left(t_mlx *game);
 void	move_up(t_mlx *game);

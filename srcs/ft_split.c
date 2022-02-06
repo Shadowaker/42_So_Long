@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 13:10:20 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/01 15:24:53 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/06 20:52:44 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static unsigned int	ft_counter(char *s, char c)
 	return (con);
 }
 
-static int	ft_strstr(char *s, char c)
+int	ft_strstr(char *s, char c)
 {
 	unsigned int	m;
 

@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 18:42:56 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/05 21:22:51 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/06 19:09:09 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static void	filter(t_mlx *game, t_cont *imgs, int *arr, char cont)
 		draw_image(game, imgs->player, arr);
 	else if (cont == 'C')
 		draw_image(game, imgs->coin, arr);
+	else if (cont == 'E')
+		draw_image(game, imgs->exit, arr);
 	else
 		draw_image(game, imgs->background, arr);
 }

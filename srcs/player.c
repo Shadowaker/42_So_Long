@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 17:13:16 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/04 18:58:09 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/06 19:27:25 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	move_up(t_mlx *game)
 	if (i == 1)
 	{
 		game->map->matrix[arr[0] + 1][arr[1]] = '0';
+		game->steps += 1;
 		game->rf = 1;
 	}
 	else if (i < 0 || i == 2)
@@ -66,6 +67,7 @@ void	move_left(t_mlx *game)
 	if (i == 1)
 	{
 		game->map->matrix[arr[0]][arr[1] + 1] = '0';
+		game->steps += 1;
 		game->rf = 1;
 	}
 	else if (i < 0 || i == 2)
@@ -86,6 +88,7 @@ void	move_down(t_mlx *game)
 	if (i == 1)
 	{
 		game->map->matrix[arr[0] - 1][arr[1]] = '0';
+		game->steps += 1;
 		game->rf = 1;
 	}
 	else if (i < 0 || i == 2)
@@ -107,6 +110,7 @@ void	move_right(t_mlx *game)
 	if (i == 1)
 	{
 		game->map->matrix[arr[0]][arr[1] - 1] = '0';
+		game->steps += 1;
 		game->rf = 1;
 	}
 	else if (i < 0 || i == 2)

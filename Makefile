@@ -24,6 +24,7 @@ all: $(NAME)
 
 ex: $(NAME)
 	./$(NAME)
+	make clean
 
 clean:
 	${RM} $(OBJ)
