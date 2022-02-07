@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 20:41:23 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/04 17:07:51 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/07 20:20:52 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_matlen(char **mat)
 	size_t	i;
 
 	i = 0;
-	while(mat[i] != 0)
+	while (mat[i] != 0)
 		i++;
 	return (i);
 }
@@ -30,17 +30,17 @@ int	*ft_coord(char **mat)
 
 	res = malloc(sizeof(int) * 2);
 	i = 0;
-	while(mat[i] != 0)
+	while (mat[i] != 0)
 	{
 		j = 0;
-		while(mat[i][j] != '\0')
+		while (mat[i][j] != '\0')
 		{
 			if (mat[i][j] == 'P')
-				{
-					res[0] = i;
-					res[1] = j;
-					return (res);
-				}
+			{
+				res[0] = i;
+				res[1] = j;
+				return (res);
+			}
 			j++;
 		}
 		i++;
@@ -67,7 +67,7 @@ char	*ft_replace(char *s, int i, char c)
 		j++;
 	}
 	res[j] = '\0';
-	return(res);
+	return (res);
 }
 
 char	*ft_strmerge(char *buff, char *tmp_buff)
@@ -123,23 +123,3 @@ char	**read_map(int fd)
 	res = ft_split(buff, '\n');
 	return (res);
 }
-
-/*
-int main()
-{
-	int		fd;
-	int		con;
-	char	**mat;
-
-	fd = open("../map.ber", O_RDONLY);
-	mat = read_map(fd);
-
-	con = 0;
-	while (con < 4)
-	{
-		printf("$%s$\n", mat[con]);
-		con++;
-	}
-	free(mat);
-}
-*/

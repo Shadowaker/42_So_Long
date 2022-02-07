@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 15:35:40 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/06 20:56:10 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/07 20:45:27 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	end_game(t_mlx *game)
 	return (0);
 }
 
-int	key_filter(int	keycode, t_mlx *game)
+int	key_filter(int keycode, t_mlx *game)
 {
 	if (keycode == 53)
 		end_game(game);
@@ -36,7 +36,7 @@ int	key_filter(int	keycode, t_mlx *game)
 	return (0);
 }
 
-int Game_Loop(t_mlx *game)
+int	game_loop(t_mlx *game)
 {
 	if (game->rf == 1)
 	{
@@ -47,21 +47,27 @@ int Game_Loop(t_mlx *game)
 	return (0);
 }
 
-int main(void)
+int	main(int argc, char **argv)
 {
 	t_mlx	game;
 	t_cont	imgs;
 
+	if (argc < 2)
+		return (error_handler(0));
+	if (map_checker(argv[1]) == 0)
+		return (error_handler(1));
 	game.mlx = mlx_init();
 	game.coins = 0;
 	game.rf = 1;
 	game.steps = 0;
-	game.map = map_init();
-	game.mlx_win = mlx_new_window(game.mlx, game.map->col * Width, game.map->line * Height, "Escape!");
-	imgs = Load_Imgs(game.mlx);
+	game.map = map_init(argv[1]);
+	game.mlx_win = mlx_new_window(game.mlx, game.map->col * W,
+			game.map->line * H, "Escape!");
+	imgs = load_imgs(game.mlx);
 	game.imgs = &imgs;
+	draw_base(&game, &imgs);
 	mlx_hook(game.mlx_win, 17, 0, end_game, &game);
-	mlx_loop_hook(game.mlx, Game_Loop, &game);
+	mlx_loop_hook(game.mlx, game_loop, &game);
 	mlx_key_hook(game.mlx_win, key_filter, &game);
 	mlx_loop(game.mlx);
 }

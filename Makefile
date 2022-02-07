@@ -1,9 +1,10 @@
-NAME = Escape.a
+NAME = so_long
 
 SRC = main.c \
 srcs/ft_draw_it.c \
 srcs/ft_map.c \
 srcs/ft_map_utils.c \
+srcs/val_map.c \
 srcs/ft_split.c \
 srcs/ft_utils.c \
 srcs/player.c
@@ -23,7 +24,7 @@ $(NAME): $(OBJ)
 all: $(NAME)
 
 ex: $(NAME)
-	./$(NAME)
+	./$(NAME) maps/map.ber
 	make clean
 
 clean:

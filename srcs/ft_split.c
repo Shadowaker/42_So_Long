@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 13:10:20 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/06 20:52:44 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/07 20:21:17 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,35 +20,6 @@ size_t	ft_strlen(char *str)
 	while (str[x] != '\0')
 		x++;
 	return (x);
-}
-
-char	*ft_substr(char *s, unsigned int start, size_t len)
-{
-	char			*sub;
-	unsigned int	i;
-	unsigned int	j;
-
-	if (s == NULL)
-		return (NULL);
-	i = 0;
-	j = (unsigned int) len;
-	if (ft_strlen(s) <= len)
-		sub = (char *) malloc(ft_strlen(s) + 1);
-	else
-		sub = (char *)malloc(j + 1);
-	if (!sub)
-		return (NULL);
-	if (!((unsigned int) ft_strlen(s) < start))
-	{
-		while (s[start] != '\0' && i < j)
-		{
-			sub[i] = s[start];
-			i++;
-			start++;
-		}
-	}
-	sub[i] = '\0';
-	return (sub);
 }
 
 static unsigned int	ft_counter(char *s, char c)
