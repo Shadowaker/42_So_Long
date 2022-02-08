@@ -11,7 +11,9 @@ srcs/ft_split.c \
 srcs/ft_utils.c \
 srcs/player.c \
 srcs/enemy.c \
-srcs/enemy_utils.c
+srcs/enemy_utils.c \
+srcs/ft_animate.c \
+srcs/animate_utils.c
 
 HDRS = incl/lib.h
 

@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 18:37:10 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/08 19:39:25 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/08 21:37:41 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,31 @@ typedef struct s_dic {
 	int		endian;
 }				t_dic;
 
+typedef struct s_player
+{
+	int		state;
+	t_dic	img1;
+	t_dic	img2;
+	t_dic	img3;
+	t_dic	img4;
+}			t_player;
+
+typedef struct s_enemy
+{
+	int		state;
+	t_dic	img1;
+	t_dic	img2;
+	t_dic	img3;
+	t_dic	img4;
+}			t_enemy;
+
+typedef struct s_coin
+{
+	int		state;
+	t_dic	img1;
+	t_dic	img2;
+}			t_coin;
+
 /* Images container */
 typedef struct s_cont {
 	t_dic	player;
@@ -78,6 +103,9 @@ typedef struct s_mlx
 	unsigned int	steps;
 	int				**enemies;
 	int				n_enemies;
+	t_player		*player;
+	t_enemy			*enemy;
+	t_coin			*coin;
 }				t_mlx;
 
 /* Functions headers */
@@ -109,6 +137,10 @@ void	draw_base_points(t_mlx *game, t_cont *imgs);
 void	draw_points(t_mlx *game);
 void	draw_string(t_mlx *game, int *arr, char *s, int offset);
 t_cont	load_imgs(void *mlx);
+t_dic	load_img(void *mlx, char *path);
+void	load_anims(t_mlx *game);
+void	filter_3(t_mlx *game, int *arr, char cont);
+void	animate_it(t_mlx *game);
 
 void	move_right(t_mlx *game);
 void	move_left(t_mlx *game);

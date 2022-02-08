@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 15:35:40 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/08 19:38:31 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/08 21:18:16 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	game_loop(t_mlx *game)
 		draw_map(game, game->imgs);
 		draw_points(game);
 	}
+	animate_it(game);
 	return (0);
 }
 
@@ -80,7 +81,7 @@ int	main(int argc, char **argv)
 	imgs = load_imgs(game.mlx);
 	game.imgs = &imgs;
 	draw_base(&game, &imgs);
-	//draw_base_points(&game, &imgs);
+	load_anims(&game);
 	mlx_hook(game.mlx_win, 17, 0, end_game, &game);
 	mlx_loop_hook(game.mlx, game_loop, &game);
 	mlx_key_hook(game.mlx_win, key_filter, &game);
