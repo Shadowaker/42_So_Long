@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 18:42:56 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/07 20:33:43 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/08 15:07:54 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	filter_1(t_mlx *game, t_cont *imgs, int *arr, char cont)
 	else if (cont == '0')
 		draw_image(game, imgs->background, arr);
 	else if (cont == 'N')
-		draw_image(game, imgs->exit, arr);
+		draw_image(game, imgs->enemy, arr);
 }
 
 static void	filter_2(t_mlx *game, t_cont *imgs, int *arr, char cont)

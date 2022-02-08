@@ -4,10 +4,14 @@ SRC = main.c \
 srcs/ft_draw_it.c \
 srcs/ft_map.c \
 srcs/ft_map_utils.c \
+srcs/ft_itoa.c \
+srcs/show_points.c \
 srcs/val_map.c \
 srcs/ft_split.c \
 srcs/ft_utils.c \
-srcs/player.c
+srcs/player.c \
+srcs/enemy.c \
+srcs/enemy_utils.c
 
 HDRS = incl/lib.h
 

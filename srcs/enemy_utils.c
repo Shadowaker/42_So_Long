@@ -6,88 +6,111 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 19:44:51 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/07 20:30:09 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/08 19:41:40 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/lib.h"
 
-static int	ft_pseudo_random(int x, int y)
+static int	ft_random(int x, int y)
 {
-	int	i;
-	int	j;
+	static int	i = 0;
+	int			n;
 
-	if (x * 2 > ft_strlen(SEED))
-		i = (int) SEED[x * 2];
-	else
-		i = (int) SEED[x];
-	if (y * 2 > ft_strlen(SEED))
-		j = (int) SEED[y * 2];
-	else
-		j = (int) SEED[y];
-	if (i > j)
+	if (i > (int) ft_strlen(SEED))
 	{
-		if (i - 5 > j)
-			return (0);
+		i = x - y;
+		if (i < 0)
+			n = i * -1;
 		else
-			return (1);
+			n = i;
+	}
+	else
+		n = (int) SEED[i];
+	while (n > 3)
+	{
+		if (n > 9)
+			n /= 10;
+		else
+			n /= 3;
+	}
+	i += 3;
+	return (n);
+}
+
+static int	move_cond(t_mlx *game, int i, int j)
+{
+	if (game->map->matrix[i][j] == '0')
+		return (1);
+	return (0);
+}
+
+static int	move_y(t_mlx *game, int enemy_ind, int m, int *npos)
+{
+	int	con;
+
+	con = 0;
+	if (m == 2)
+	{
+		npos = arr(game->enemies[enemy_ind][0],
+				game->enemies[enemy_ind][1] + 1);
+		if (move_cond(game, npos[0], npos[1]) == 1)
+			con = move_it(game, npos, enemy_ind);
 	}
 	else
 	{
-		if (j - 5 > i)
-			return (2);
-		else
-			return (3);
+		npos = arr(game->enemies[enemy_ind][0],
+				game->enemies[enemy_ind][1] + 1);
+		if (move_cond(game, npos[0], npos[1]) == 1)
+			con = move_it(game, npos, enemy_ind);
 	}
+	return (con);
 }
 
-static void	move_x(t_mlx *game, t_enm *enemy, int *pos)
+static int	move_x(t_mlx *game, int enemy_ind, int m, int *npos)
 {
-	game->map->matrix[pos[1]][pos[0]] = 'N';
-	game->map->matrix[pos[2]][pos[0]] = '0';
-	enemy->x = pos[1];
-	enemy->y = pos[0];
+	int	con;
+
+	con = 0;
+	if (m == 0)
+	{
+		npos = arr(game->enemies[enemy_ind][0] + 1,
+				game->enemies[enemy_ind][1]);
+		if (move_cond(game, npos[0], npos[1]) == 1)
+			con = move_it(game, npos, enemy_ind);
+	}
+	else
+	{
+		npos = arr(game->enemies[enemy_ind][0] - 1,
+				game->enemies[enemy_ind][1]);
+		if (move_cond(game, npos[0], npos[1]) == 1)
+			con = move_it(game, npos, enemy_ind);
+	}
+	return (con);
 }
 
-static void	move_y(t_mlx *game, t_enm *enemy, int *pos)
-{
-	game->map->matrix[pos[0]][pos[1]] = 'N';
-	game->map->matrix[pos[0]][pos[2]] = '0';
-	enemy->x = pos[0];
-	enemy->y = pos[1];
-}
-
-void	may_the_force(int *arr, int i, int j, int k)
-{
-	arr[0] = i;
-	arr[1] = j;
-	arr[2] = k;
-}
-
-void	random_move(t_mlx *game, t_enm *enemy, int i, int j)
+void	random_move(t_mlx *game, int enemy_ind)
 {
 	int	m;
-	int	*pos;
+	int	n;
+	int	con;
+	int	*npos;
 
-	m = ft_pseudo_random(i, j);
-	pos = (int *) malloc(sizeof(int) * 3);
-	if (!pos)
-		return ;
-	if (m == 0 || m == 1)
+	con = 0;
+	m = ft_random(game->enemies[enemy_ind][0], game->enemies[enemy_ind][1]);
+	n = 0;
+	npos = NULL;
+	while (con == 0 && n < 4)
 	{
-		if (m == 0)
-			may_the_force(pos, j, i - 1, i);
+		if (m == 0 || m == 1)
+			con = move_x(game, enemy_ind, m, npos);
 		else
-			may_the_force(pos, j, i - 1, i);
-		move_x(game, enemy, pos);
-	}
-	else
-	{
-		if (m == 2)
-			may_the_force(pos, i, j - 1, j);
+			con = move_y(game, enemy_ind, m, npos);
+		if (con == 0 && n == 0)
+			m = n;
 		else
-			may_the_force(pos, i, j + 1, j);
-		move_y(game, enemy, pos);
+			m++;
+		n++;
+		free(npos);
 	}
-	free(pos);
 }

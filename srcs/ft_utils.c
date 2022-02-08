@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 16:05:54 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/07 20:21:48 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/08 11:25:49 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,16 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	}
 	sub[i] = '\0';
 	return (sub);
+}
+
+int	*ft_arr(int a, int b)
+{
+	int	*arr;
+
+	arr = (int *) malloc(sizeof(int) * 2);
+	arr[0] = a;
+	arr[1] = b;
+	return (arr);
 }
 
 int	error_handler(int cond)

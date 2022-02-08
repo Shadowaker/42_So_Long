@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 18:39:46 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/07 20:20:12 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/08 17:43:20 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ void	draw_image(t_mlx *game, t_dic img, int *arr)
 {
 	mlx_put_image_to_window(game->mlx, game->mlx_win,
 		img.img, arr[1] * W, arr[0] * H);
+}
+
+void	draw_string(t_mlx *game, int *arr, char *s, int offset)
+{
+	mlx_string_put(game->mlx, game->mlx_win, arr[1] * W,
+		(arr[0] * H) + offset, TEXT_COLOR, s);
 }
 
 t_dic	load_img(void *mlx, char *path)
@@ -48,5 +54,6 @@ t_cont	load_imgs(void *mlx)
 	imgs.enemy = load_img(mlx, "sprites/64px/Enemy/Enemy_0.xpm");
 	imgs.exit = load_img(mlx, "sprites/64px/Exit/Exit.xpm");
 	imgs.background = load_img(mlx, "sprites/64px/Background/Background.xpm");
+	imgs.background2 = load_img(mlx, "sprites/64px/Background/Background2.xpm");
 	return (imgs);
 }

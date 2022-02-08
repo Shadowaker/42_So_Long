@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 15:35:40 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/07 20:45:27 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/08 19:38:31 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,23 @@ int	key_filter(int keycode, t_mlx *game)
 
 int	game_loop(t_mlx *game)
 {
+	int	i;
+
+	i = 0;
 	if (game->rf == 1)
 	{
 		game->rf = 0;
-		printf("Steps: %d\n", game->steps);
+		if (game->n_enemies > 0)
+		{
+			while (i < game->n_enemies)
+			{
+				move_enemy(game, i);
+				i++;
+			}
+		}
+		//printf("Steps: %d\n", game->steps);
 		draw_map(game, game->imgs);
+		draw_points(game);
 	}
 	return (0);
 }
@@ -61,11 +73,14 @@ int	main(int argc, char **argv)
 	game.rf = 1;
 	game.steps = 0;
 	game.map = map_init(argv[1]);
+	game.enemies = form_enm(&game);
+	game.n_enemies = cens_enm(&game);
 	game.mlx_win = mlx_new_window(game.mlx, game.map->col * W,
-			game.map->line * H, "Escape!");
+			(game.map->line + 1) * H, "Escape!");
 	imgs = load_imgs(game.mlx);
 	game.imgs = &imgs;
 	draw_base(&game, &imgs);
+	//draw_base_points(&game, &imgs);
 	mlx_hook(game.mlx_win, 17, 0, end_game, &game);
 	mlx_loop_hook(game.mlx, game_loop, &game);
 	mlx_key_hook(game.mlx_win, key_filter, &game);

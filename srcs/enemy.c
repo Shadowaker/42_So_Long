@@ -6,58 +6,83 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 18:51:26 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/07 20:16:53 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/08 19:37:36 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/lib.h"
 
-int	move_i(t_mlx *game, int i, int j)
+int	move_it(t_mlx *game, int*npos, int ei)
 {
-	if (game->map->matrix[i + 1][j] == '1')
-	{
-		game->map->matrix[i - 1][j] = 'N';
-		game->map->matrix[i][j] = '0';
-	}
-	else if (game->map->matrix[i - 1][j] == '1')
-	{
-		game->map->matrix[i + 1][j] = 'N';
-		game->map->matrix[i][j] = '0';
-	}
-	else
-		return (0);
+	game->map->matrix[npos[0]][npos[1]] = 'N';
+	game->map->matrix[game->enemies[ei][0]][game->enemies[ei][1]] = '0';
+	game->enemies[ei][0] = npos[0];
+	game->enemies[ei][1] = npos[1];
 	return (1);
 }
 
-int	move_j(t_mlx *game, int i, int j)
+int	*arr(int i, int j)
 {
-	if (game->map->matrix[i][j + 1] == '1')
-	{
-		game->map->matrix[i][j - 1] = 'N';
-		game->map->matrix[i][j] = '0';
-	}
-	else if (game->map->matrix[i][j - 1] == '1')
-	{
-		game->map->matrix[i][j + 1] = 'N';
-		game->map->matrix[i][j] = '0';
-	}
-	else
-		return (0);
-	return (1);
+	int	*arr;
+
+	arr = (int *) malloc(sizeof(int) * 2);
+	arr[0] = i;
+	arr[1] = j;
+	return (arr);
 }
 
-int	move_enemy(t_mlx *game, t_enm *enemy)
+void	move_enemy(t_mlx *game, int enemy_ind)
 {
-	int	i;
-	int	j;
+	random_move(game, enemy_ind);
+}
 
-	i = enemy->x;
-	j = enemy->y;
-	if (move_i(game, i, j) == 1)
-		return (1);
-	else if (move_j(game, i, j) == 1)
-		return (1);
-	else
-		random_move(game, enemy, i, j);
-	return (1);
+size_t	cens_enm(t_mlx *game)
+{
+	int		i;
+	int		j;
+	size_t	con;
+
+	i = 0;
+	con = 0;
+	while (game->map->matrix[i] != 0)
+	{
+		j = 0;
+		while (game->map->matrix[i][j] != '\0')
+		{
+			if (game->map->matrix[i][j] == 'N')
+				con++;
+			j++;
+		}
+		i++;
+	}
+	return (con);
+}
+
+int	**form_enm(t_mlx *game)
+{
+	int		i;
+	int		j;
+	size_t	con;
+	int		**enemies;
+
+	con = cens_enm(game);
+	enemies = (int **) malloc((sizeof(int *) * con) + 1);
+	i = 0;
+	con = 0;
+	while (game->map->matrix[i] != 0)
+	{
+		j = 0;
+		while (game->map->matrix[i][j] != '\0')
+		{
+			if (game->map->matrix[i][j] == 'N')
+			{
+				enemies[con] = ft_arr(i, j);
+				con++;
+			}
+			j++;
+		}
+		i++;
+	}
+	enemies[con] = 0;
+	return (enemies);
 }
