@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 18:39:46 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/08 21:38:51 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/08 21:41:29 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	my_mlx_pixel_put(t_dic *data, int x, int y, int color)
 
 void	draw_image(t_mlx *game, t_dic img, int *arr)
 {
-	printf("DRAWING\n");
 	mlx_put_image_to_window(game->mlx, game->mlx_win,
 		img.img, arr[1] * W, arr[0] * H);
 }

@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 14:44:35 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/08 17:42:31 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/09 17:36:40 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	draw_points(t_mlx *game)
 	draw_image(game, game->imgs->background2, arr);
 	arr[1] = (int) game->map->col - 2;
 	draw_image(game, game->imgs->background2, arr);
-	printf("%s\n", s);
 	draw_string(game, arr, s, 0);
 	free(s);
 	arr[0] = (int) game->map->line;

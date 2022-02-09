@@ -30,7 +30,7 @@ $(NAME): $(OBJ)
 all: $(NAME)
 
 ex: $(NAME)
-	./$(NAME) maps/map.ber
+	./$(NAME) maps/map2.ber
 	make clean
 
 clean:

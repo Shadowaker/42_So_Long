@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 19:44:51 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/08 19:41:40 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/09 19:55:15 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static int	ft_random(int x, int y)
 	static int	i = 0;
 	int			n;
 
+	if (i > 250)
+		i = 0;
 	if (i > (int) ft_strlen(SEED))
 	{
 		i = x - y;
