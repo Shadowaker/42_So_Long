@@ -6,14 +6,14 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 20:58:21 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/09 21:28:12 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/10 22:05:54 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIB_H
 # define LIB_H
 
-# include <mlx.h>
+# include "../mlx/mlxb/mlx.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -58,9 +58,14 @@ typedef struct s_dic {
 /* Images container */
 typedef struct s_cont {
 	t_dic	player;
+	t_dic	player1;
+	t_dic	player2;
 	t_dic	coin;
+	t_dic	coin1;
 	t_dic	wall;
 	t_dic	enemy;
+	t_dic	enemy1;
+	t_dic	enemy2;
 	t_dic	exit;
 	t_dic	background;
 	t_dic	background2;
@@ -78,16 +83,8 @@ typedef struct s_mlx
 	unsigned int	steps;
 	int				**enemies;
 	int				n_enemies;
-	t_c				animations;
+	int				isinmenu;
 }				t_mlx;
-
-/* Container Animations */
-typedef struct c_c
-{
-	t_dic	*player;
-	t_dic	*enemy;
-	t_dic	*coin;
-}			t_c;
 
 /* Functions headers */
 
@@ -99,6 +96,14 @@ char	*ft_replace(char *s, int i, char c);
 int		*ft_coord(char **mat);
 void	ft_printmat(char **mat);
 int		map_checker(char *path);
+
+int		end_game(t_mlx *game);
+void	game_init(t_mlx *game, char *path);
+int		key_filter(int keycode, t_mlx *game);
+void	draw_menu(t_mlx *game, t_cont *imgs);
+void	draw_win(t_mlx *game, t_cont *imgs);
+void	draw_lose(t_mlx *game, t_cont *imgs);
+void	draw_menu_string(t_mlx *game);
 
 char	**ft_split(char *s, char c);
 int		ft_strstr(char *s, char c);
@@ -112,12 +117,19 @@ int		error_handler(int cond);
 
 void	my_mlx_pixel_put(t_dic *data, int x, int y, int color);
 void	draw_image(t_mlx *game, t_dic img, int *arr);
+void	draw_image2(t_mlx *game, t_dic img, int i, int j);
 void	draw_map(t_mlx *game, t_cont *imgs);
 void	draw_base(t_mlx *game, t_cont *imgs);
 void	draw_base_points(t_mlx *game, t_cont *imgs);
 void	draw_points(t_mlx *game);
 void	draw_string(t_mlx *game, int *arr, char *s, int offset);
+void	filter_2(t_mlx *game, t_cont *imgs, int *arr, char cont);
+t_dic	load_img(void *mlx, char *path);
 t_cont	load_imgs(void *mlx);
+
+void	ft_draw_player(t_mlx *game, t_cont *imgs, int *arr);
+void	ft_draw_enemy(t_mlx *game, t_cont *imgs, int *arr);
+void	ft_draw_coin(t_mlx *game, t_cont *imgs, int *arr);
 
 void	move_right(t_mlx *game);
 void	move_left(t_mlx *game);

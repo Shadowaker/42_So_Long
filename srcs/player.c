@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 17:13:16 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/08 18:53:08 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/10 19:43:20 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	mov_cond(t_mlx *game, int *npos)
 {
 	if (game->map->matrix[npos[0]][npos[1]] == '0')
 	{
+		draw_image(game, game->imgs->background, npos);
 		game->map->matrix[npos[0]][npos[1]] = 'P';
 		return (1);
 	}
@@ -25,6 +26,7 @@ int	mov_cond(t_mlx *game, int *npos)
 		return (2);
 	else if (game->map->matrix[npos[0]][npos[1]] == 'C')
 	{
+		draw_image(game, game->imgs->background, npos);
 		game->map->matrix[npos[0]][npos[1]] = 'P';
 		game->coins += 1;
 		return (1);

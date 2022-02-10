@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 20:41:23 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/07 20:20:52 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/10 17:39:05 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	*ft_coord(char **mat)
 	int	*res;
 
 	res = malloc(sizeof(int) * 2);
+	if (!res)
+		return (NULL);
 	i = 0;
 	while (mat[i] != 0)
 	{

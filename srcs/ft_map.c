@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 18:42:56 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/09 17:43:04 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/10 22:05:28 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_map	*map_init(char *path)
 	fd = open(path, O_RDONLY);
 	mat = read_map(fd);
 	map = (t_map *) malloc(sizeof(t_map));
+	if (!map)
+		return (NULL);
 	map->matrix = mat;
 	map->col = ft_strlen(mat[0]);
 	map->line = ft_matlen(mat);
@@ -30,18 +32,21 @@ t_map	*map_init(char *path)
 static void	filter_1(t_mlx *game, t_cont *imgs, int *arr, char cont)
 {
 	if (cont == 'P')
-		draw_image(game, imgs->player, arr);
+		ft_draw_player(game, imgs, arr);
 	else if (cont == 'C')
-		draw_image(game, imgs->coin, arr);
+	{
+		draw_image(game, imgs->background, arr);
+		ft_draw_coin(game, imgs, arr);
+	}
 	else if (cont == 'E')
 		draw_image(game, imgs->exit, arr);
 	else if (cont == '0')
 		draw_image(game, imgs->background, arr);
 	else if (cont == 'N')
-		draw_image(game, imgs->enemy, arr);
+		ft_draw_enemy(game, imgs, arr);
 }
 
-static void	filter_2(t_mlx *game, t_cont *imgs, int *arr, char cont)
+void	filter_2(t_mlx *game, t_cont *imgs, int *arr, char cont)
 {
 	if (cont == '1')
 		draw_image(game, imgs->wall, arr);
@@ -92,5 +97,11 @@ void	draw_base(t_mlx *game, t_cont *imgs)
 			free(arr);
 		}
 		i++;
+	}
+	j = 0;
+	while (game->map->col >= j)
+	{
+		draw_image2(game, imgs->background2, i, j);
+		j++;
 	}
 }

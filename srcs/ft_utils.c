@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 16:05:54 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/08 11:25:49 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/10 20:35:47 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,12 @@ int	*ft_arr(int a, int b)
 int	error_handler(int cond)
 {
 	if (cond == 0)
-		write(1, "\33[91mError: Not enough arguments.\033[0m\n",
-			ft_strlen("\33[91mError: Not enough arguments.\033[0m\n"));
+		printf("\33[91mError: Not enough arguments.\033[0m\n");
 	else if (cond == 1)
-		write(1, "\33[91mError: Map error!\033[0m\n",
-			ft_strlen("\33[91mError: Map error!\033[0m\n"));
+		printf("\33[91mError: Map error!\033[0m\n");
+	else if (cond == 2)
+		printf("\33[91mMemory error, try to free some ram!\033[0m\n");
+	else if (cond == 99)
+		printf("\33[91mLibrary error.\033[0m\n");
 	return (0);
 }

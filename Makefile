@@ -13,7 +13,8 @@ srcs/player.c \
 srcs/enemy.c \
 srcs/enemy_utils.c \
 srcs/ft_animate.c \
-srcs/animate_utils.c
+srcs/ft_win_or_lose.c \
+srcs/ft_game_utils.c
 
 HDRS = incl/lib.h
 
@@ -25,6 +26,7 @@ RM = rm -f
 	gcc -Wall -Wextra -Werror -Imlx -I ${HDRS} -c $< -o $@
 
 $(NAME): $(OBJ)
+	make -C ./mlx/mlxb/
 	gcc $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 all: $(NAME)
@@ -32,6 +34,7 @@ all: $(NAME)
 ex: $(NAME)
 	./$(NAME) maps/map2.ber
 	make clean
+	make -C ./mlx/mlxb/ clean
 
 clean:
 	${RM} $(OBJ)

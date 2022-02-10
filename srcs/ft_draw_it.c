@@ -6,24 +6,22 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 18:39:46 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/08 21:41:29 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/10 22:05:34 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/lib.h"
 
-void	my_mlx_pixel_put(t_dic *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_len + x * (data->bpp / 8));
-	*(unsigned int *) dst = color;
-}
-
 void	draw_image(t_mlx *game, t_dic img, int *arr)
 {
 	mlx_put_image_to_window(game->mlx, game->mlx_win,
 		img.img, arr[1] * W, arr[0] * H);
+}
+
+void	draw_image2(t_mlx *game, t_dic img, int i, int j)
+{
+	mlx_put_image_to_window(game->mlx, game->mlx_win,
+		img.img, j * W, i * H);
 }
 
 void	draw_string(t_mlx *game, int *arr, char *s, int offset)
@@ -48,10 +46,15 @@ t_cont	load_imgs(void *mlx)
 {
 	t_cont	imgs;
 
-	imgs.player = load_img(mlx, "sprites/64px/Player/Player_0.xpm");
-	imgs.coin = load_img(mlx, "sprites/64px/Coin/Coin_0.xpm");
+	imgs.player = load_img(mlx, "sprites/64px/Player/Player.xpm");
+	imgs.player1 = load_img(mlx, "sprites/64px/Player/Player_1.xpm");
+	imgs.player2 = load_img(mlx, "sprites/64px/Player/Player_2.xpm");
+	imgs.coin = load_img(mlx, "sprites/64px/Coin/Coin.xpm");
+	imgs.coin1 = load_img(mlx, "sprites/64px/Coin/Coin_1.xpm");
 	imgs.wall = load_img(mlx, "sprites/64px/Wall/Wall.xpm");
-	imgs.enemy = load_img(mlx, "sprites/64px/Enemy/Enemy_0.xpm");
+	imgs.enemy = load_img(mlx, "sprites/64px/Enemy/Enemy.xpm");
+	imgs.enemy1 = load_img(mlx, "sprites/64px/Enemy/Enemy_1.xpm");
+	imgs.enemy2 = load_img(mlx, "sprites/64px/Enemy/Enemy_2.xpm");
 	imgs.exit = load_img(mlx, "sprites/64px/Exit/Exit.xpm");
 	imgs.background = load_img(mlx, "sprites/64px/Background/Background.xpm");
 	imgs.background2 = load_img(mlx, "sprites/64px/Background/Background2.xpm");
