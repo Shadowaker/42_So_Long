@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 19:59:33 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/10 20:20:55 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/11 12:40:52 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,16 @@ void	ft_draw_coin(t_mlx *game, t_cont *imgs, int *arr)
 	if (i == 0)
 	{
 		draw_image(game, imgs->coin, arr);
+		i++;
+	}
+	else if (i == 1)
+	{
+		draw_image(game, imgs->coin1, arr);
+		i++;
+	}
+	else if (i == 2)
+	{
+		draw_image(game, imgs->coin2, arr);
 		i++;
 	}
 	else

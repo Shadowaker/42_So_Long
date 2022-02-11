@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 17:13:16 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/10 19:43:20 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/11 12:22:23 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,11 @@ void	move_up(t_mlx *game)
 		game->steps += 1;
 		game->rf = 1;
 	}
-	else if (i < 0 || i == 2)
-		end_game(game);
 	free(arr);
+	if (i < 0)
+		game_over(game, 2);
+	else if (i == 2)
+		game_over(game, 1);
 }
 
 void	move_left(t_mlx *game)
@@ -72,9 +74,11 @@ void	move_left(t_mlx *game)
 		game->steps += 1;
 		game->rf = 1;
 	}
-	else if (i < 0 || i == 2)
-		end_game(game);
 	free(arr);
+	if (i < 0)
+		game_over(game, 2);
+	else if (i == 2)
+		game_over(game, 1);
 }
 
 void	move_down(t_mlx *game)
@@ -93,10 +97,11 @@ void	move_down(t_mlx *game)
 		game->steps += 1;
 		game->rf = 1;
 	}
-	else if (i < 0 || i == 2)
-		end_game(game);
-	else
-		free(arr);
+	free(arr);
+	if (i < 0)
+		game_over(game, 2);
+	else if (i == 2)
+		game_over(game, 1);
 }
 
 void	move_right(t_mlx *game)
@@ -115,7 +120,9 @@ void	move_right(t_mlx *game)
 		game->steps += 1;
 		game->rf = 1;
 	}
-	else if (i < 0 || i == 2)
-		end_game(game);
 	free(arr);
+	if (i < 0)
+		game_over(game, 2);
+	else if (i == 2)
+		game_over(game, 1);
 }

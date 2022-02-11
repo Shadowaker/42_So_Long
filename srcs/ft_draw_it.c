@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 18:39:46 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/10 22:05:34 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/11 12:40:25 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_cont	load_imgs(void *mlx)
 	imgs.player2 = load_img(mlx, "sprites/64px/Player/Player_2.xpm");
 	imgs.coin = load_img(mlx, "sprites/64px/Coin/Coin.xpm");
 	imgs.coin1 = load_img(mlx, "sprites/64px/Coin/Coin_1.xpm");
+	imgs.coin2 = load_img(mlx, "sprites/64px/Coin/Coin_2.xpm");
 	imgs.wall = load_img(mlx, "sprites/64px/Wall/Wall.xpm");
 	imgs.enemy = load_img(mlx, "sprites/64px/Enemy/Enemy.xpm");
 	imgs.enemy1 = load_img(mlx, "sprites/64px/Enemy/Enemy_1.xpm");

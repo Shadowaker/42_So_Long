@@ -6,13 +6,13 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 20:40:34 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/10 22:10:25 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/11 12:31:57 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <../incl/lib.h>
 
-int	end_game(t_mlx *game, char c)
+int	end_game(t_mlx *game)
 {
 	mlx_destroy_window(game->mlx, game->mlx_win);
 	exit(0);
@@ -21,6 +21,7 @@ int	end_game(t_mlx *game, char c)
 
 void	game_init(t_mlx *game, char *path)
 {
+	game->path = path;
 	game->coins = 0;
 	game->rf = 1;
 	game->steps = 0;
@@ -44,7 +45,7 @@ int	key_filter(int keycode, t_mlx *game)
 		}
 	}
 	if (keycode == 53)
-		end_game(game, 'e');
+		end_game(game);
 	else if (keycode == 13 || keycode == 126)
 		move_up(game);
 	else if (keycode == 0 || keycode == 123)
@@ -85,7 +86,7 @@ void	draw_menu(t_mlx *game, t_cont *imgs)
 	}
 }
 
-void	draw_menu_string(t_mlx *game)
+void	draw_menu_string(t_mlx *game, char *s, int off)
 {
 	int				*arr;
 	size_t			i;
@@ -100,7 +101,7 @@ void	draw_menu_string(t_mlx *game)
 			arr = (int *) malloc(sizeof(int) * 2);
 			arr[0] = i;
 			arr[1] = j;
-			draw_string(game, arr, "PRESS SPACE TO CONTINUE...", 0);
+			draw_string(game, arr, s, off);
 			free(arr);
 		}
 		j++;

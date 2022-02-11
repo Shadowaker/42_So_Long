@@ -6,11 +6,27 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 15:35:40 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/10 21:47:32 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/11 12:56:10 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "incl/lib.h"
+
+int	game_over(t_mlx *game, int cond)
+{
+	game->isinmenu = 0;
+	draw_go(game, game->imgs);
+	if (cond == 1)
+		draw_go_string(game, "YOU WIN! :D");
+	else
+		draw_go_string(game, "YOU LOSE! :C");
+	draw_menu_string(game, "PRESS SPACE TO PLAY AGAIN", 0);
+	draw_menu_string(game, "PRESS ESC TO QUIT", 32);
+	free(game->enemies);
+	free(game->map);
+	game_init(game, game->path);
+	return (0);
+}
 
 int	game_loop(t_mlx *game)
 {
@@ -26,7 +42,7 @@ int	game_loop(t_mlx *game)
 	return (0);
 }
 
-int	key_loop(int keycode, t_mlx *game)
+static int	key_loop(int keycode, t_mlx *game)
 {
 	if (game->isinmenu == 0)
 	{
@@ -43,10 +59,10 @@ int	key_loop(int keycode, t_mlx *game)
 	return (0);
 }
 
-void	menu_start(t_mlx *game)
+static void	menu_start(t_mlx *game)
 {
 	draw_menu(game, game->imgs);
-	draw_menu_string(game);
+	draw_menu_string(game, "PRESS SPACE TO CONTINUE...", 0);
 }
 
 int	main(int argc, char **argv)

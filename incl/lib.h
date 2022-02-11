@@ -6,7 +6,7 @@
 /*   By: dridolfo <dridolfo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 20:58:21 by dridolfo          #+#    #+#             */
-/*   Updated: 2022/02/10 22:05:54 by dridolfo         ###   ########.fr       */
+/*   Updated: 2022/02/11 12:40:36 by dridolfo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_cont {
 	t_dic	player2;
 	t_dic	coin;
 	t_dic	coin1;
+	t_dic	coin2;
 	t_dic	wall;
 	t_dic	enemy;
 	t_dic	enemy1;
@@ -78,6 +79,7 @@ typedef struct s_mlx
 	void			*mlx_win;
 	t_map			*map;
 	t_cont			*imgs;
+	char			*path;
 	int				coins;
 	unsigned int	rf;
 	unsigned int	steps;
@@ -101,9 +103,10 @@ int		end_game(t_mlx *game);
 void	game_init(t_mlx *game, char *path);
 int		key_filter(int keycode, t_mlx *game);
 void	draw_menu(t_mlx *game, t_cont *imgs);
-void	draw_win(t_mlx *game, t_cont *imgs);
-void	draw_lose(t_mlx *game, t_cont *imgs);
-void	draw_menu_string(t_mlx *game);
+int		game_over(t_mlx *game, int cond);
+void	draw_go(t_mlx *game, t_cont *imgs);
+void	draw_go_string(t_mlx *game, char *s);
+void	draw_menu_string(t_mlx *game, char *s, int off);
 
 char	**ft_split(char *s, char c);
 int		ft_strstr(char *s, char c);
