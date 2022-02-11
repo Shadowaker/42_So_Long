@@ -38,9 +38,11 @@ ex: $(NAME)
 
 clean:
 	${RM} $(OBJ)
+	make -C ./mlx/mlxb/ clean
 
 fclean: clean
 	${RM} $(NAME) ${OBJ}
+	make -C ./mlx/mlxb/ clean
 
 re: $(NAME)
 
